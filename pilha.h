@@ -1,8 +1,8 @@
 #include <stdlib.h>
 
-typedef struct cell{
+typedef struct Cell{
     int item;
-    struct cell *prox;
+    struct Cell *prox;
 } Pilha;
 
 int currentPilha;
@@ -21,15 +21,14 @@ bool isEmptyPilha(){
 }
 
 bool deletePilha(){
-    int Aux;
     Pilha *Temp;
     if(isEmptyPilha())
         return false;
 
     while(Topo!=NULL){
         Temp=Topo;
-          Temp->prox=NULL;
         Topo=Topo->prox;
+          Temp->prox=NULL;
         free(Temp);
     }
     currentPilha=0;

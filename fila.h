@@ -5,6 +5,7 @@ typedef struct cell{
     struct cell *prox;
 } Fila;
 
+
 int currentFila;
 Fila *Inicio;
 Fila *Fim;
@@ -23,7 +24,6 @@ bool isEmptyFila(){
 }
 
 bool deleteFila(){
-    int Aux;
     Fila *Temp;
     if(isEmptyFila())
         return false;
@@ -43,9 +43,13 @@ bool pushFila(int valor){
     Fila *Temp = (Fila*)malloc(sizeof(Fila));
     if(Temp==NULL)
         return false;
-    Temp->item = valor;
+    Temp->item = valor; //(*) .
     Temp->prox = NULL;
-    Fim->prox=Temp;
+    if(isEmptyFila()){
+		Inicio=Temp;
+	}else{
+		Fim->prox=Temp;
+	}
     Fim=Temp;
     currentFila++;
     return true;
@@ -62,6 +66,8 @@ bool popFila(int &valor){
       Temp->prox=NULL;
     free(Temp);
     currentFila--;
+    if(isEmptyFila())
+    	Fim=NULL;
     return true;
 }
 
